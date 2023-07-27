@@ -14,11 +14,6 @@ bool simulateGame(const int players)
         stack.push_back(i);
     }
     random_shuffle(stack.begin(), stack.end());
-    for (int i = 0; i < 98; i++)
-    {
-        cout << stack[i] << " ";
-    }
-    cout << "\n";
 
     return true;
 }
@@ -31,11 +26,6 @@ int main()
         cout << "Enter amount of players (greater than 0): ";
         cin >> players;
     } while (players <= 0);
-
-    for (int i = 0; i < 5; i++)
-    {
-        simulateGame(players);
-    }
 
     return 0;
 }
