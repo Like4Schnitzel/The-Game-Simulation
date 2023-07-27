@@ -12,13 +12,23 @@ bool simulateGame(const int players)
     if (players < 3) cardsInHand = 7;
     else cardsInHand = 6;
 
-    //populate and shuffle stack
-    vector<int> stack;
+    //populate and shuffle main stack
+    vector<int> mainStack;
     for (int i = 2; i <= 99; i++)
     {
-        stack.push_back(i);
+        mainStack.push_back(i);
     }
-    random_shuffle(stack.begin(), stack.end());
+    random_shuffle(mainStack.begin(), mainStack.end());
+
+    //populate side stacks
+    //first two stacks descend in number, last two ascend
+    vector<vector<int>> sideStacks;
+    for (int i = 0; i < 4; i++)
+    {
+        sideStacks.push_back(vector<int>());
+        if (i < 2) sideStacks[i].push_back(100);
+        else sideStacks[i].push_back(1);
+    }
 
     //give initial cards to players
     vector<vector<int>> hands;
@@ -27,15 +37,18 @@ bool simulateGame(const int players)
         hands.push_back(vector<int>());
         for (int j = 0; j < cardsInHand; j++)
         {
-            hands[i].push_back(stack.back());
-            stack.pop_back();
+            hands[i].push_back(mainStack.back());
+            mainStack.pop_back();
         }
     }
 
     //main game loop
-    int current_player = 0;
-    while (stack.size() > 0)
+    int currentPlayer = 0;
+    while (mainStack.size() > 0)
     {
+        currentPlayer = (currentPlayer + 1) % players;
+
+
     }
 
     //win
