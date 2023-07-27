@@ -6,14 +6,14 @@
 
 using namespace std;
 
-bool simulateGame(const int players, const unsigned seed)
+bool simulateGame(const int players)
 {
     vector<int> stack;
     for (int i = 2; i <= 99; i++)
     {
         stack.push_back(i);
     }
-    shuffle(stack.begin(), stack.end(), default_random_engine(seed));
+    random_shuffle(stack.begin(), stack.end());
     for (int i = 0; i < 98; i++)
     {
         cout << stack[i] << " ";
@@ -25,7 +25,6 @@ bool simulateGame(const int players, const unsigned seed)
 
 int main()
 {
-    const unsigned seed = chrono::system_clock::now().time_since_epoch().count();
     int players;
     do 
     {
@@ -35,7 +34,7 @@ int main()
 
     for (int i = 0; i < 5; i++)
     {
-        simulateGame(players, seed);
+        simulateGame(players);
     }
 
     return 0;
