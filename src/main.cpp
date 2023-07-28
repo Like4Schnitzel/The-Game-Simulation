@@ -12,22 +12,22 @@ bool simulateGame(const int players)
     if (players < 3) cardsInHand = 7;
     else cardsInHand = 6;
 
-    //populate and shuffle main stack
-    vector<int> mainStack;
+    //populate and shuffle draw pile
+    vector<int> drawPile;
     for (int i = 2; i <= 99; i++)
     {
-        mainStack.push_back(i);
+        drawPile.push_back(i);
     }
-    random_shuffle(mainStack.begin(), mainStack.end());
+    random_shuffle(drawPile.begin(), drawPile.end());
 
-    //populate side stacks
-    //first two stacks descend in number, last two ascend
-    vector<vector<int>> sideStacks;
+    //populate discard piles
+    //first two piles descend in number, last two ascend
+    vector<vector<int>> discardPiles;
     for (int i = 0; i < 4; i++)
     {
-        sideStacks.push_back(vector<int>());
-        if (i < 2) sideStacks[i].push_back(100);
-        else sideStacks[i].push_back(1);
+        discardPiles.push_back(vector<int>());
+        if (i < 2) discardPiles[i].push_back(100);
+        else discardPiles[i].push_back(1);
     }
 
     //give initial cards to players
@@ -37,14 +37,14 @@ bool simulateGame(const int players)
         hands.push_back(vector<int>());
         for (int j = 0; j < cardsInHand; j++)
         {
-            hands[i].push_back(mainStack.back());
-            mainStack.pop_back();
+            hands[i].push_back(drawPile.back());
+            drawPile.pop_back();
         }
     }
 
     //main game loop
     int currentPlayer = 0;
-    while (mainStack.size() > 0)
+    while (drawPile.size() > 0)
     {
         currentPlayer = (currentPlayer + 1) % players;
 
